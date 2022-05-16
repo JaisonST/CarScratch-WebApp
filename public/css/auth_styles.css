@@ -1,0 +1,73 @@
+body{
+    background-image: url('/images/auth_back_drop.jpeg');
+    background-color: rgba(7, 11, 33, 0.9);
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: cover;
+    font-family: 'Mukta', sans-serif;
+}
+
+.center-container{
+    margin-top: 100px;
+    width: 100%;
+    text-align: center;
+}
+
+.form-container{
+    margin: auto;
+    min-width: 300px;
+    width: 40%;
+    text-align: center;
+    /*background-color: #211d34;*/
+}
+
+
+input, input:disabled{
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid #4C506F;
+    color: #4C506F;
+    font-size: x-large;
+    width: 100%;
+}
+
+input:focus{
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.auth-title{
+    color: #01FE8D;
+}
+
+.textfield-label{
+    color: #4C506F;
+    margin: auto;
+    padding: 40px 0px 0px 0px;
+    text-align: left;
+    width: 80%;
+}
+
+.auth-button{
+    background-color: #01FE8D;
+    border: none;
+    color: #211d34;
+    border-radius: 30px;
+    margin: 40px 0px 0px 0px;
+    padding: 20px;
+    font-family: 'Mukta', sans-serif;
+    font-weight: bold;
+    font-size: large;
+    width: 80%;
+}
+
+.auth-redirect-text{
+    color: #4C506F;
+    text-decoration: none;
+}
+.err-message{
+    color: rgba(247, 67, 67, 0.8);
+    margin-top: 10px;
+}

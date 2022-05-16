@@ -6,11 +6,13 @@ var cookieParser = require('cookie-parser');
 const app = express() 
 const flash = require("express-flash")
 const passport = require('passport')
+var path = require('path')
 //============================================================
 //configuration 
 var port = process.env.PORT || 3000; 
 require('./config/passport-config')(passport) 
 app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
