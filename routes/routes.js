@@ -2,7 +2,7 @@
 function routesConfiguration(app, passport) {
 
     //main home page - todo add signout button 
-	app.get('/', isLoggedIn,function(req, res) {
+	app.get('/',function(req, res) {
 		res.render('index' , {
             user : req.user
         }); // load the index.ejs file
@@ -21,7 +21,7 @@ function routesConfiguration(app, passport) {
 
 	// process the login form
 	app.post('/login',  passport.authenticate('local-login', {
-            successRedirect : '/',      // redirect to home page
+            successRedirect : '/home',      // redirect to home page
             failureRedirect : '/login', // redirect back to login page 
             failureFlash : true         // allow flash messages
 		}),
@@ -49,7 +49,7 @@ function routesConfiguration(app, passport) {
 
 	// process the register form
 	app.post('/register', passport.authenticate('local-register', {
-		successRedirect : '/',          // redirect to the home page
+		successRedirect : '/home',          // redirect to the home page
 		failureRedirect : '/register',  // redirect back to the register page 
 		failureFlash : true             // allow flash messages
 	}));
@@ -60,6 +60,10 @@ function routesConfiguration(app, passport) {
 		req.logout();
 		res.redirect('/login');
 	});
+
+	app.get('/home',isLoggedIn, function(req, res) {
+		res.render('home');
+	});
 };
 
 // route middleware for user state 
@@ -69,8 +73,8 @@ function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 
-	// if they aren't redirect them to the login page
-	res.redirect('/login');
+	// if they aren't redirect them to the landing page
+	res.redirect('/');
 }
 
 // route middleware for user state 
@@ -81,7 +85,7 @@ function isLoggedOut(req, res, next) {
 		return next();
 
 	// if they aren't redirect them to the home page
-	res.redirect('/');
+	res.redirect('/home');
 }
 
 
