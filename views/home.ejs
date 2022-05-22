@@ -2,9 +2,39 @@
 <html lang="en">
 <head>
     <title>DefectFind</title>
+    <link rel="stylesheet" href="/css/home_style.css">
 </head>
 <body>
     <h1>HomePage</h1>
+    <!-- Upload Form Modal -->
+    <div id="formModal" class="form-modal">
+
+        <!-- Form content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="/record/upload" method="POST" onsubmit="closeModal()">
+                <br><br>
+                <div class="textfield-label">
+                    <label for="numberPlate" >Number Plate</label><br>
+                    <input type="text" id = "numberPlate" name = "numberPlate" required>
+                </div>
+                <div class="textfield-label">
+                    <label for="images" >Images</label><br>
+                    <input type="file" id="images" name="images" accept="image/png, image/jpeg, image/jpg" multiple required>
+                </div>
+                <button class="auth-button" type="submit">Submit</button>
+            </form>
+        </div>
+  
+    </div>
+
+
     <a href="/logout" >Logout</a>
+    <div class="floating-container">
+        <div class="icon-button"  onclick="addRecord()">
+            <div class="icon">+</div>
+        </div>
+    </div>
+    <script src="/js/home_script.js"></script>
 </body>
 </html>
