@@ -1,9 +1,9 @@
 const {spawn} = require("child_process");
 
 // Python model handler 
-function callModel(subfolder){
+function callModel(files, target_folder){
  return new Promise((success, error) => {
-        const py = spawn('python', ['./model_files/model.py', subfolder]);
+        const py = spawn('python', ['./model_files/model.py', files, target_folder]);
         var prediction;
 
         // Execute python code, listen to stdout for prediction

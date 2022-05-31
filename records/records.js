@@ -1,5 +1,9 @@
 var multer  = require('multer')
 var fs = require('fs');
+
+var loadModel = require('../node_model/load_model.js');
+var callModel = require('../node_model/model_handler.js');
+
 //database 
 const mysql = require('mysql'); 
 var connection = mysql.createConnection({
@@ -13,7 +17,7 @@ connection.connect();
 
 //global variable to track record name 
 var record_id = "";
-
+var images_list = []; 
 // const setRecordID = function (req, res, next) {
 //   console.log(req.body)
 //   console.log("user id: " + req.user.id.toString())
@@ -50,8 +54,10 @@ var storage = multer.diskStorage({
       const user = req.user.id 
       const nb = req.body.numberPlate 
       const dt = Date.now()
+      const fname = user.toString()+nb.toString()+dt.toString() + "."+file.originalname.split(".")[1]; 
       //todo: store the value below in db. 
-      cb(null, user.toString()+nb.toString()+dt.toString())
+      images_list.push(fname)
+      cb(null, fname)
     }
 })
 var upload = multer({ storage: storage })
@@ -62,19 +68,22 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 function recordController(app, passport) {
     app.post('/record/upload',  upload.array('images', 12), createRecord ,async function(req, res) {
       
-      console.log("upload file req subbmitted");
       //this returns the number plate
       //console.log(req.body.numberPlate);
-      var user = req.user 
-  
+      
+      var dir = __dirname.split('/Desktop')[0] + '/Desktop/images/'+req.user.id;
+      
       // Steps 
-      // 1) upload images to server.
-      // done in the upload() function above 
+      // 1) upload images to server done in upload.array() 
       // 2) call python function to detect image. 
+      await loadModel().catch(err => console.log("Error: " + err));
+      
+      pred = await callModel(images_list, dir).catch(err => console.log("Error: " + err));
+      
       console.log('Emulated python function delay');
-      await delay(5000);
       // 3) store results on the server. (or do that on in the python function)
       console.log("storing results")
+      images_list = []; 
       // 4) redirect to home after adding new record   
       res.redirect('/home');
     });

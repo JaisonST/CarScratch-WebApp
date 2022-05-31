@@ -11,9 +11,11 @@ from object_detection.utils import visualization_utils as viz_utils
 def callModel():
     damageCount = 0
 
-    # Target folder
-    target_folder = './uploads/' + sys.argv[1] + '/'
+    # Filtering user uploaded images
+    target_files = sys.argv[1].split(',')
+    target_folder = sys.argv[2] + '/pre'
     test_images = os.listdir(target_folder)
+    test_images = [x for x in test_images for i in target_files if i == x]
 
     # Retrieve label map, detection model and clearance model 
     loaded_params = load()
@@ -88,7 +90,7 @@ def callDetectionModel(file, loaded_params, filename, target_folder):
                 min_score_thresh=.6,
                 agnostic_mode=False)
 
-    save_path = target_folder + '/detected' + str(filename)
+    save_path = target_folder + '/post' + str(filename)
     cv2.imwrite(save_path, image_np_with_detections)
 
 if __name__ == '__main__':

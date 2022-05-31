@@ -5,7 +5,6 @@ from tensorflow.keras.models import load_model
 from object_detection.utils import label_map_util
 from object_detection.builders import model_builder
 from object_detection.utils import config_util
-import json
 
 def load():
     loaded_params ={}
