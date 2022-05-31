@@ -28,6 +28,7 @@ app.use(flash())
 
 //routes ======================================================= 
 require('./routes/routes.js')(app, passport);
+require('./records/records.js')(app, passport);
 
 //start the server 
 app.listen(port)
