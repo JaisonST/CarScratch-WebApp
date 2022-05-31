@@ -1,5 +1,40 @@
 var multer  = require('multer')
 var fs = require('fs');
+//database 
+const mysql = require('mysql'); 
+var connection = mysql.createConnection({
+    host:process.env.DATABASE_HOST,
+    user:process.env.DATABASE_USER, 
+    password:process.env.DATABASE_PASSWORD, 
+    database: process.env.DATABASE_DB, 
+})
+
+connection.connect(); 
+
+//global variable to track record name 
+var record_id = "";
+
+// const setRecordID = function (req, res, next) {
+//   console.log(req.body)
+//   console.log("user id: " + req.user.id.toString())
+//   console.log("number plate: " + req.body.numberPlate)
+//   console.log("dateTime: " + Date.now().toString() + "\n\n")
+//   return next();
+// }
+
+const createRecord = function (req, res, next) {
+  //call mysql function to create record. id + numberplate + datetime  
+  var nb = req.user.id.toString() + req.body.numberPlate.toString() +  Date.now().toString(); 
+  var insertQuery = "INSERT INTO records ( id, number_plate, user_id ) values (?,?,?)";
+                connection.query(insertQuery,[nb, req.body.numberPlate, req.user.id],function(err, rows) {
+                    if(err) console.log("ERROR TO BE HANDLED" + err.toString()); 
+                    if(!err){
+                        console.log("Created Record");
+                    }
+                })
+  next();
+}
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -22,14 +57,16 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+
+
 function recordController(app, passport) {
-    app.post('/record/upload', upload.array('images', 12), async function(req, res) {
-      console.log("upload file req subbmitted");
+    app.post('/record/upload',  upload.array('images', 12), createRecord ,async function(req, res) {
       
+      console.log("upload file req subbmitted");
       //this returns the number plate
       //console.log(req.body.numberPlate);
       var user = req.user 
-      
+  
       // Steps 
       // 1) upload images to server.
       // done in the upload() function above 
