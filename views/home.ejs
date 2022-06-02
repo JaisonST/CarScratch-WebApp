@@ -29,6 +29,12 @@
 
 
     <a href="/logout" >Logout</a>
+    <ul>
+        <% locals.records.forEach((item) => { %>
+          <li><%= item.id %></li>
+        <% }) %>
+    </ul>
+
     <div class="floating-container">
         <div class="icon-button"  onclick="addRecord()">
             <div class="icon">+</div>

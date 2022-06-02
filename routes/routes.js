@@ -1,6 +1,17 @@
 const loadModel = require('../node_model/load_model');
 const path = require('path');
+
 const generatePdf = require('../public/js/pdf');
+const getUserRecords = require('../public/js/db');
+
+
+records_list = [1,2,3] 
+
+const getUserRecordsFromDb = async function(req,res,next){
+	var recods = await getUserRecords(req.user.id)
+	records_list = recods
+	next();
+}
 
 // app/routes.js
 function routesConfiguration(app, passport) {
@@ -66,8 +77,9 @@ function routesConfiguration(app, passport) {
 	});
 
 	// ---- Added loading model functionality
-	app.get('/home',isLoggedIn, function(req, res) {
-		res.render('home');
+	app.get('/home',isLoggedIn, getUserRecordsFromDb, async function(req, res) {	
+		//send the records to home 
+		res.render('home', {records:records_list});
 		loadModel().catch(err => console.log("Error: " + err));
 	});
 
