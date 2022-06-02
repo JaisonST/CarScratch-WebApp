@@ -92,12 +92,9 @@ function routesConfiguration(app, passport) {
 	// ---- Sending report info to be rendered dynamically in the result.html
 	app.get('/data', (req, res) => {
 		recordInfo = {
-			id: 1,
-			user: "Jaison",
-			files: ["121654094890921.jpeg"],
+			id: req.user.id,
+			user: req.user.name,
 			date: "01/06/2022",
-			report_id: "121654094890924",
-			number_plate: "2"
 		};
 		res.json(recordInfo);
 	});
@@ -105,7 +102,7 @@ function routesConfiguration(app, passport) {
 
 // route middleware for user state 
 function isLoggedIn(req, res, next) {
-
+	console.log(req.user);
 	// if user is authenticated in the session, carry on
 	if (req.isAuthenticated())
 		return next();
@@ -116,7 +113,7 @@ function isLoggedIn(req, res, next) {
 
 // route middleware for user state 
 function isLoggedOut(req, res, next) {
-
+	
 	// if user is not authenticated in the session, carry on
 	if (!req.isAuthenticated())
 		return next();

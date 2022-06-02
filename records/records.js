@@ -28,6 +28,7 @@ var images_list = [];
 const createRecord = function (req, res, next) {
   //call mysql function to create record. id + numberplate + datetime  
   var nb = req.user.id.toString() + req.body.numberPlate.toString() +  Date.now().toString(); 
+  record_id = nb; 
   var insertQuery = "INSERT INTO records ( id, number_plate, user_id ) values (?,?,?)";
                 connection.query(insertQuery,[nb, req.body.numberPlate, req.user.id],function(err, rows) {
                     if(err) console.log("ERROR TO BE HANDLED" + err.toString()); 
@@ -74,17 +75,13 @@ function recordController(app, passport) {
       // Steps 
       // 1) upload images to server done in upload.array() 
       // 2) call python function to detect image. 
-      
       pred = await callModel(images_list, dir).catch(err => console.log("Error: " + err));
-      
-      console.log('Emulated python function delay');
       // 3) store results on the server. (or do that on in the python function)
-      console.log("storing results")
-      images_list = []; 
+      
       // 4) redirect to home after adding new record   
       // res.redirect('/home');
-
-      res.redirect('/result');
+      res.redirect('/result?record_id='+record_id+'&record_list='+images_list.toString()+"&number_plate=" +req.body.numberPlate);
+      images_list = []; 
     });
 }
 
