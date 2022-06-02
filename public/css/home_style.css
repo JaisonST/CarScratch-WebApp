@@ -47,7 +47,7 @@
   .modal-content {
     border-radius: 10px;
     text-align: center;
-    background-color: #fefefe;
+    background-color: #4C506F;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -55,6 +55,53 @@
     width: 40%;
   }
   
+  .create-record{
+
+  }
+ .create-record .upload-container{
+   width: 80%;
+   margin: auto;
+ } 
+
+.create-record-title{
+  color: #01FE8D;
+  font-family: 'Mukta', sans-serif;
+}
+
+.create-record .submit-button{
+  width: 80%;
+  border-radius: 30px;
+  border: none;
+  background-color: #01FE8D;
+  margin: 20px 0px 0px 0px;
+  padding: 5px;
+  color: #4C506F;
+}
+
+
+.create-record .textfield-label{
+  color: #01FE8D;
+  font-family: 'Mukta', sans-serif;
+  margin: auto;
+  padding: 1px 0px 10px 0px;
+  text-align: left;
+  width: 80%;
+}
+
+.create-record input, input:disabled{
+  margin-top: 5px;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  height: 20px;
+}
+
+.create-record input:focus{
+  border-bottom: 3px solid #01FE8D;
+  background-color: #fafafa;
+  color: black;
+}
+
   /* The Close Button */
   .close {
     color: #aaaaaa;
