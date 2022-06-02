@@ -12,7 +12,7 @@ var conn = mysql.createConnection({
 const query = util.promisify(conn.query).bind(conn);
 
 async function getUserRecords(id){
-    const rows = await query("SELECT * FROM records WHERE user_id = ? ",[id]); 
+    const rows = await query("SELECT * FROM records WHERE user_id = ? ORDER BY time desc",[id]); 
     return rows;
     
 }
