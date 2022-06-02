@@ -1,3 +1,7 @@
+const loadModel = require('../node_model/load_model');
+const path = require('path');
+const generatePdf = require('../public/js/pdf');
+
 // app/routes.js
 function routesConfiguration(app, passport) {
 
@@ -61,8 +65,29 @@ function routesConfiguration(app, passport) {
 		res.redirect('/login');
 	});
 
+	// ---- Added loading model functionality
 	app.get('/home',isLoggedIn, function(req, res) {
 		res.render('home');
+		loadModel().catch(err => console.log("Error: " + err));
+	});
+
+	// ---- Result.html 
+	app.get('/result', async(req, res) =>{
+		res.sendFile(path.join(__dirname.split('routes')[0] + '/views/result.html'));
+		generatePdf;
+	});
+
+	// ---- Sending report info to be rendered dynamically in the result.html
+	app.get('/data', (req, res) => {
+		recordInfo = {
+			id: 1,
+			user: "Jaison",
+			files: ["121654094890921.jpeg"],
+			date: "01/06/2022",
+			report_id: "121654094890924",
+			number_plate: "2"
+		};
+		res.json(recordInfo);
 	});
 };
 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DefectFind | Result</title>
+
+    <!-- Bootstrap files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" crossorigin="anonymous"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="application/javascript">
+        // Get report info 
+        function get() {
+            return new Promise(function (res, rej) {
+                req = new XMLHttpRequest();
+                req.open('GET', '/data');
+                req.send();
+                req.onload = () => res(req.response);
+            });
+        }
+
+        get().then(function (data) {
+            fillInfo(JSON.parse(data));
+        }).catch(err => console.log("Error you dumbass"));
+
+        // Inject into html
+        function fillInfo(info) {
+            user = document.getElementById("user");
+            date = document.getElementById("date");
+            plate = document.getElementById("plate");
+            reportId = document.getElementById("reportId");
+            resultImages = document.getElementById("resultImages");
+
+            files = info.files;
+            user.innerHTML += info.user;
+            date.innerHTML += info.date;
+            plate.innerHTML += info.number_plate;
+            reportId.innerHTML += info.report_id;
+
+            count = 1;
+            Array.from(files).forEach(element => {
+                resultImages.innerHTML += `<h5 class="mt-4"> ${element} </h5><img src="../records/Desktop/images/${info.id}/pre/${element}" height="200px" width="300px" class="p-2">`;
+                resultImages.innerHTML += `<img src="../records/Desktop/images/${info.id}/post/${element}" height="200px" width="300px" class="p-2">`;
+                if (count == 3 || ((count + 1) % 4 == 0)) {
+                    resultImages.innerHTML += `<h5 class="mt-4"> ${element} </h5><img src="../records/Desktop/images/${info.id}/pre/${element}" height="200px" width="300px" class="p-2">`;
+                    resultImages.innerHTML += `<img src="../records/Desktop/images/${info.id}/post/${element}" height="200px" width="300px" class="p-2">`;
+                    resultImages.innerHTML += `<div class="html2pdf__page-break"></div>`;
+                }
+                count++;
+            });
+
+            createPdf(info.report_id);
+        }
+
+        function createPdf(filename) {
+            console.log("Create");
+
+            // Creating pdf
+            const content = document.getElementById("content");
+            options = {
+                margin: 10,
+                filename: `${filename}.pdf`,
+                html2canvas: { dpi: 192, letterRendering: true, logging: true },
+                jsPdf: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                image: { type: 'jpeg', quality: 0.95 }
+            };
+
+            html2pdf().set(options).from(content).save();
+        }
+    </script>
+
+</head>
+
+<body class="p-5">
+    <div class="content m-auto" id="content">
+
+        <div class="report-heading d-flex justify-content-between mt-0">
+            <div class="title">DEFECTFIND</div>
+            <div class="date" id="date"></div>
+        </div>
+
+        <div class="report-id text-center mt-5">
+            <h1 id="reportId">Report Id: </h1>
+            <h5 class="mt-4" id="user">User: </h4>
+                <h6 id="plate">Number plate: </h6>
+        </div>
+
+        <div class="results mt-5 text-center">
+            <div class="uploaded-images">
+                <h1>Results: </h1>
+                <div class="images-container mt-4" id="resultImages">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+
+</html>
