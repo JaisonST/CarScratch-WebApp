@@ -29,18 +29,22 @@
 
     <!-- Upload Form Modal -->
     <div id="formModal" class="form-modal">
-
         <!-- Form content -->
+
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <div class="close-container">
+                <span class="close">&times;</span>
+            </div>
             <h1 class="create-record-title">Create Record</h1>
-            <form action="/record/upload" method="POST" onsubmit="closeModal()"  enctype="multipart/form-data" class="create-record">
+            <form action="/record/upload" method="POST" onsubmit="closeModal()" enctype="multipart/form-data"
+                class="create-record">
                 <div class="textfield-label">
-                    <label for="numberPlate" >Number Plate</label><br>
-                    <input type="text" id = "numberPlate" name = "numberPlate" required>
+                    <label for="numberPlate">Number Plate</label><br>
+                    <input type="text" id="numberPlate" name="numberPlate" required>
                 </div>
                 <div class="upload-container">
-                    <input type="file" id="images" name="images" accept="image/png, image/jpeg, image/jpg" multiple required>
+                    <input type="file" id="images" name="images" accept="image/png, image/jpeg, image/jpg" multiple
+                        required>
                 </div>
                 <button class="submit-button" type="submit">Submit</button>
             </form>
@@ -72,15 +76,21 @@
             </div>
             <ul class="list-group mt-5">
                 <% locals.records.forEach((item)=> { %>
-                    <li class="list-group-item p-2 d-flex align-items-center justify-content-between">
-                        <div class="leading d-flex align-items-center">
-                            <i class="bi bi-file-earmark-pdf"></i>
-                            <div class="name"><%= item.id %></div>
-                        </div>
-                        <div class="date"><%= item.time.toString().split('GMT')[0] %></div>
-                        <i class="bi bi-three-dots-vertical"></i>
-                    </li>
-                <% }) %>
+                    <a target="_blank" href=<%= "/reports/" + item.id +".pdf" %> >
+                        <li class="list-group-item p-2 d-flex align-items-center justify-content-between">
+                            <div class="leading d-flex align-items-center">
+                                <i class="bi bi-file-earmark-pdf"></i>
+                                <div class="name">
+                                    <%= item.id %>
+                                </div>
+                            </div>
+                            <div class="date">
+                                <%= item.time.toString().split('GMT')[0] %>
+                            </div>
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </li>
+                    </a>
+                    <% }) %>
             </ul>
         </div>
 

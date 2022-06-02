@@ -86,13 +86,12 @@ function routesConfiguration(app, passport) {
 	// ---- Result.html 
 	app.get('/result', async(req, res) =>{
 		res.sendFile(path.join(__dirname.split('routes')[0] + '/views/result.html'));
-		generatePdf;
+		// generatePdf;
 	});
 
 	// ---- Sending report info to be rendered dynamically in the result.html
 	app.get('/data', (req, res) => {
 		recordInfo = {
-			id: req.user.id,
 			user: req.user.name,
 			date: "02.06.2022",
 		};

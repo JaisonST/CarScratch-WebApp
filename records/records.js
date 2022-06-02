@@ -5,6 +5,7 @@ var callModel = require('../node_model/model_handler.js');
 
 //database 
 const mysql = require('mysql'); 
+const generatePDF = require('../public/js/pdf.js');
 var connection = mysql.createConnection({
     host:process.env.DATABASE_HOST,
     user:process.env.DATABASE_USER, 
@@ -61,7 +62,7 @@ var storage = multer.diskStorage({
     }
 })
 var upload = multer({ storage: storage });
-
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
 function recordController(app, passport) {
@@ -80,7 +81,13 @@ function recordController(app, passport) {
       
       // 4) redirect to home after adding new record   
       // res.redirect('/home');
-      res.redirect('/result?record_id='+record_id+'&record_list='+images_list.toString()+"&number_plate=" +req.body.numberPlate);
+      url = '/result?record_id='+record_id+'&record_list='+images_list.toString()+"&number_plate=" +req.body.numberPlate + "&user_id=" + req.user.id + "&user_name=" + req.user.name;
+      res.redirect(url);
+
+      // await delay(2000); 
+      
+      generatePDF(url, record_id);
+
       images_list = []; 
     });
 }

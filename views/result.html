@@ -19,52 +19,40 @@
     <script type="application/javascript">
         const params = new URLSearchParams(window.location.search)
         var images_list = params.get("record_list").split(",");
-        // Get report info 
-        function get() {
-            return new Promise(function (res, rej) {
-                req = new XMLHttpRequest();
-                req.open('GET', '/data');
-                req.send();
-                req.onload = () => res(req.response);
-            });
-        }
-
-        get().then(function (data) {
-            fillInfo(JSON.parse(data));
-        }).catch(err => console.log("Error you dumbass"));
-
+    
         // Inject into html
-        function fillInfo(info) {
+        function fillInfo() {
             user = document.getElementById("user");
             date = document.getElementById("date");
             plate = document.getElementById("plate");
             reportId = document.getElementById("reportId");
             resultImages = document.getElementById("resultImages");
-
+    
             files = images_list;
-            user.innerHTML += info.user;
-            date.innerHTML += info.date;
+            user.innerHTML += params.get("user_name");
+            id = params.get("user_id");
+            date.innerHTML += "02.06.2022";
             plate.innerHTML += params.get("number_plate")
             reportId.innerHTML += params.get("record_id");
-
+    
             count = 1;
             Array.from(files).forEach(element => {
-                resultImages.innerHTML += `<h5 class="mt-4"> ${element} </h5><img src="../records/Desktop/images/${info.id}/pre/${element}" height="200px" width="300px" class="p-2">`;
-                resultImages.innerHTML += `<img src="../records/Desktop/images/${info.id}/post/${element}" height="200px" width="300px" class="p-2">`;
+                resultImages.innerHTML += `<h5 class="mt-4"> ${element} </h5><img src="../records/Desktop/images/${params.get("user_id")}/pre/${element}" height="200px" width="300px" class="p-2">`;
+                resultImages.innerHTML += `<img src="../records/Desktop/images/${params.get("user_id")}/post/${element}" height="200px" width="300px" class="p-2">`;
                 if (count == 3 || ((count + 1) % 4 == 0)) {
-                    resultImages.innerHTML += `<h5 class="mt-4"> ${element} </h5><img src="../records/Desktop/images/${info.id}/pre/${element}" height="200px" width="300px" class="p-2">`;
-                    resultImages.innerHTML += `<img src="../records/Desktop/images/${info.id}/post/${element}" height="200px" width="300px" class="p-2">`;
+                    resultImages.innerHTML += `<h5 class="mt-4"> ${element} </h5><img src="../records/Desktop/images/${params.get("user_id")}/pre/${element}" height="200px" width="300px" class="p-2">`;
+                    resultImages.innerHTML += `<img src="../records/Desktop/images/${params.get("user_id")}/post/${element}" height="200px" width="300px" class="p-2">`;
                     resultImages.innerHTML += `<div class="html2pdf__page-break"></div>`;
                 }
                 count++;
             });
-
+    
             createPdf(params.get("record_id"));
         }
-
+    
         function createPdf(filename) {
             console.log("Create");
-
+    
             // Creating pdf
             const content = document.getElementById("content");
             options = {
@@ -74,14 +62,14 @@
                 jsPdf: { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 image: { type: 'jpeg', quality: 0.95 }
             };
-
+    
             html2pdf().set(options).from(content).save();
         }
     </script>
-
+        
 </head>
 
-<body class="p-5">
+<body class="p-5" onload="fillInfo();">
     <div class="content m-auto" id="content">
         <div class="report-heading d-flex justify-content-between mt-0">
             <div class="title">DEFECTFIND</div>
@@ -103,6 +91,7 @@
         </div>
     </div>
 </body>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
     integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

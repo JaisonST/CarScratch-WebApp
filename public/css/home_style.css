@@ -75,6 +75,11 @@
   width: 40%;
 }
 
+.close-container{
+  width: 100%;
+  text-align: right;
+}
+
 .create-record {
   width: 100%;
 }
@@ -82,6 +87,8 @@
 .create-record .upload-container {
   width: 80%;
   margin: auto;
+  padding: 10px 0px 10px 0px;
+  /* font-size: large; */
 }
 
 .create-record-title {
@@ -94,7 +101,7 @@
   border-radius: 30px;
   border: none;
   background-color: #01FE8D;
-  margin: 20px 0px 0px 0px;
+  margin: 20px 0px 10px 0px;
   padding: 5px;
   color: #4C506F;
 }
@@ -189,4 +196,8 @@ body{
 
 .name {
   margin-left: 1.3rem;
+}
+
+a{
+  text-decoration: none;
 }
