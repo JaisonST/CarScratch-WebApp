@@ -1,7 +1,6 @@
 var multer  = require('multer')
 var fs = require('fs');
 
-var loadModel = require('../node_model/load_model.js');
 var callModel = require('../node_model/model_handler.js');
 
 //database 
@@ -35,7 +34,7 @@ const createRecord = function (req, res, next) {
                     if(!err){
                         console.log("Created Record");
                     }
-                })
+                });
   next();
 }
 
@@ -60,8 +59,7 @@ var storage = multer.diskStorage({
       cb(null, fname)
     }
 })
-var upload = multer({ storage: storage })
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+var upload = multer({ storage: storage });
 
 
 
@@ -72,11 +70,10 @@ function recordController(app, passport) {
       //console.log(req.body.numberPlate);
       
       var dir = __dirname.split('/Desktop')[0] + '/Desktop/images/'+req.user.id;
-      
+    
       // Steps 
       // 1) upload images to server done in upload.array() 
       // 2) call python function to detect image. 
-      await loadModel().catch(err => console.log("Error: " + err));
       
       pred = await callModel(images_list, dir).catch(err => console.log("Error: " + err));
       
@@ -85,7 +82,9 @@ function recordController(app, passport) {
       console.log("storing results")
       images_list = []; 
       // 4) redirect to home after adding new record   
-      res.redirect('/home');
+      // res.redirect('/home');
+
+      res.redirect('/result');
     });
 }
 

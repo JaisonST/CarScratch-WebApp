@@ -13,6 +13,7 @@ var port = process.env.PORT || 3000;
 require('./config/passport-config')(passport) 
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/records', express.static(path.join(__dirname, 'records')));
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())

@@ -7,13 +7,14 @@ import tensorflow as tf
 from load import load
 from tensorflow.keras.preprocessing import image
 from object_detection.utils import visualization_utils as viz_utils
+import shutil
 
 def callModel():
     damageCount = 0
 
     # Filtering user uploaded images
     target_files = sys.argv[1].split(',')
-    target_folder = sys.argv[2] + '/pre'
+    target_folder = sys.argv[2] + '/pre/'
     test_images = os.listdir(target_folder)
     test_images = [x for x in test_images for i in target_files if i == x]
 
@@ -43,9 +44,11 @@ def callModel():
             damageCount = damageCount + 1
             file = target_folder + i
             callDetectionModel(file, loaded_params, i, target_folder)
-        
-        print("Damaged: ", damageCount)
-        print("Clean: ", len(test_images) - damageCount)
+        else:
+            shutil.copyfile(sys.argv[2]+'/post/'+i)
+
+    print("Damaged: ", damageCount)
+    print("Clean: ", len(test_images) - damageCount)
 
 # Function to run detections
 @tf.function
@@ -90,7 +93,7 @@ def callDetectionModel(file, loaded_params, filename, target_folder):
                 min_score_thresh=.6,
                 agnostic_mode=False)
 
-    save_path = target_folder + '/post' + str(filename)
+    save_path = sys.argv[2] + '/post/' + str(filename)
     cv2.imwrite(save_path, image_np_with_detections)
 
 if __name__ == '__main__':
