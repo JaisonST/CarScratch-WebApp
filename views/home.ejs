@@ -12,17 +12,16 @@
         <!-- Form content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-            <form action="/record/upload" method="POST" onsubmit="closeModal()"  enctype="multipart/form-data">
-                <br><br>
+            <h1 class="create-record-title">Create Record</h1>
+            <form action="/record/upload" method="POST" onsubmit="closeModal()"  enctype="multipart/form-data" class="create-record">
                 <div class="textfield-label">
                     <label for="numberPlate" >Number Plate</label><br>
                     <input type="text" id = "numberPlate" name = "numberPlate" required>
                 </div>
-                <div class="textfield-label">
-                    <label for="images" >Images</label><br>
+                <div class="upload-container">
                     <input type="file" id="images" name="images" accept="image/png, image/jpeg, image/jpg" multiple required>
                 </div>
-                <button class="auth-button" type="submit">Submit</button>
+                <button class="submit-button" type="submit">Submit</button>
             </form>
         </div>
   
@@ -30,6 +29,12 @@
 
 
     <a href="/logout" >Logout</a>
+    <ul>
+        <% locals.records.forEach((item) => { %>
+          <li><%= item.id %></li>
+        <% }) %>
+    </ul>
+
     <div class="floating-container">
         <div class="icon-button"  onclick="addRecord()">
             <div class="icon">+</div>
