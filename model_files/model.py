@@ -39,13 +39,14 @@ def callModel():
         prediction = isDamage[np.argmax(pred)]
         print(prediction)
 
-        # Layer 2: Object detection model 
+        file = target_folder + i
+        
+    # Layer 2: Object detection model 
         if(prediction == "Damaged"):
             damageCount = damageCount + 1
-            file = target_folder + i
             callDetectionModel(file, loaded_params, i, target_folder)
         else:
-            shutil.copyfile(sys.argv[2]+'/post/'+i)
+            shutil.copyfile(file, sys.argv[2]+'/post/'+i)
 
     print("Damaged: ", damageCount)
     print("Clean: ", len(test_images) - damageCount)

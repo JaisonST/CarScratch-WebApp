@@ -1,0 +1,109 @@
+:root{
+    --sidebar-color : #25262E;
+    --body-color : #1C1B22;
+    --selected-color: #33343A;
+    --text-color: #cecdd1;
+    --blue: #6077E5;
+    --purple: #4A3BC0;
+    --light-purple: #B1ABDF;
+    --light-pink: #F1CAFB;
+    --pink: #CE68E8;
+    --green: #009764;
+}
+
+body{
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+/* Navbar */
+.navbar{
+    background-color: var(--sidebar-color) !important;
+}
+
+/* Hero */
+.hero-title{
+    /* border: 2px solid white; */
+}
+
+.bg-img{
+    /* border: 2px solid white; */
+}
+
+span{
+    color: var(--blue);
+}
+
+.hero-title>h1{
+    font-size: 3.5rem;
+}
+
+/* Stats */
+.stats{
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.file-uploads{
+    border-right: 1px solid white;
+}
+
+.icon-container{
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+}
+
+.ic-1{
+    background-color: var(--light-purple);
+}
+
+.ic-2{
+    background-color: var(--light-pink);
+}
+
+.i-1{
+    color: var(--purple);
+    font-size: 2.7rem;
+}
+
+.i-2{
+    color: var(--pink);
+    font-size: 2.7rem;
+}
+
+/* Features */
+.carousel-inner{
+    width: 400px;
+}
+
+.carousel-item>img{
+    height: 300px;
+}
+
+.card-body{
+    color: var(--body-color);
+}
+
+.feature-container>.card{
+    width: 300px;
+    background-color: var(--sidebar-color);
+}
+
+/* Model Cards */
+.model-card{
+    width: 600px;
+    height: 400px;
+}
+
+/* Footer */
+footer{
+    margin-top: 5%;
+    background-color: var(--sidebar-color);
+    padding: 0rem 50px;
+}
+
+.web-title{
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+}

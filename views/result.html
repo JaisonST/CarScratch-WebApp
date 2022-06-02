@@ -59,7 +59,7 @@
                 count++;
             });
 
-            createPdf(info.report_id);
+            createPdf(params.get("record_id"));
         }
 
         function createPdf(filename) {
@@ -69,7 +69,7 @@
             const content = document.getElementById("content");
             options = {
                 margin: 10,
-                filename: `${filename}.pdf`,
+                filename: `Report_${filename}.pdf`,
                 html2canvas: { dpi: 192, letterRendering: true, logging: true },
                 jsPdf: { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 image: { type: 'jpeg', quality: 0.95 }

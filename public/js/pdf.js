@@ -8,7 +8,7 @@ async function generatePDF(){
     await page.goto('http://localhost:80/result/');
 
     // Saves pdf 
-    await page.pdf({ path: './records/Report_1123456.pdf', format: 'A4' });
+    await page.pdf({ path: './records/', format: 'A4' });
     
     await browser.close();
 }

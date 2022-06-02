@@ -1,74 +1,95 @@
-.floating-container{
-    position:fixed;
-    bottom:50px;
-    right:50px;
-    cursor:pointer;
+:root {
+  --sidebar-color: #25262E;
+  --body-color: #1C1B22;
+  --selected-color: #33343A;
+  --text-color: #cecdd1;
+  --blue: #6077E5;
+  --purple: #4A3BC0;
+  --light-purple: #B1ABDF;
+  --light-pink: #F1CAFB;
+  --pink: #CE68E8;
 }
 
-.icon-button{
-    width:50px;
-    height:50px;
-    border-radius: 100%;
-    background: #01FE8D;
-    box-shadow: 10px 10px 5px #aaaaaa;
-    cursor: pointer;
-    color: #4C506F;
+.floating-container {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  cursor: pointer;
 }
 
-.icon-button:active{
-    color:#01FE8D;
-    background-color: #4C506F;
+.icon-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: #01FE8D;
+  box-shadow: 10px 10px 5px #aaaaaa;
+  cursor: pointer;
+  color: #4C506F;
 }
-.icon-button .icon{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height: 100%;
-    font-size: x-large;
+
+.icon-button:active {
+  color: #01FE8D;
+  background-color: #4C506F;
+}
+
+.icon-button .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: x-large;
 }
 
 
 /* The Modal (background) */
-.form-modal{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%; 
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
-    border-radius: 10px;
-    text-align: center;
-    background-color: #4C506F;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    min-width: 300px;
-    width: 40%;
-  }
-  
-  .create-record{
-    width: 100%;
-  }
- .create-record .upload-container{
-   width: 80%;
-   margin: auto;
- } 
+.form-modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
 
-.create-record-title{
+/* Modal Content */
+.modal-content {
+  border-radius: 10px;
+  text-align: center;
+  background-color: #4C506F;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  min-width: 300px;
+  width: 40%;
+}
+
+.create-record {
+  width: 100%;
+}
+
+.create-record .upload-container {
+  width: 80%;
+  margin: auto;
+}
+
+.create-record-title {
   color: #01FE8D;
   font-family: 'Mukta', sans-serif;
 }
 
-.create-record .submit-button{
+.create-record .submit-button {
   width: 80%;
   border-radius: 30px;
   border: none;
@@ -79,7 +100,7 @@
 }
 
 
-.create-record .textfield-label{
+.create-record .textfield-label {
   color: #01FE8D;
   font-family: 'Mukta', sans-serif;
   margin: auto;
@@ -88,7 +109,8 @@
   width: 80%;
 }
 
-.create-record input, input:disabled{
+.create-record input,
+input:disabled {
   margin-top: 5px;
   width: 100%;
   border: 0;
@@ -96,23 +118,75 @@
   height: 20px;
 }
 
-.create-record input:focus{
+.create-record input:focus {
   border-bottom: 3px solid #01FE8D;
   background-color: #fafafa;
   color: black;
 }
 
-  /* The Close Button */
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body{
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+.side-container {
+  background-color: var(--sidebar-color);
+}
+
+.logo {
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+.bi {
+  font-size: 2rem;
+}
+
+.bi-chevron-down {
+  font-size: 1rem;
+}
+
+.content {
+  width: 100vw;
+}
+
+.bi-plus-square {
+  margin-right: 1.7rem;
+}
+
+.stats {
+  background-color: var(--sidebar-color);
+}
+
+.folder {
+  background-color: var(--sidebar-color);
+  padding: 0.2rem 1rem;
+  width: fit-content;
+}
+
+.list-group-item {
+  background-color: var(--sidebar-color);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  margin: 0.8rem 0rem;
+  padding: 0.8rem 1.6rem !important;
+}
+
+.name {
+  margin-left: 1.3rem;
+}

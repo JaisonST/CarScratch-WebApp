@@ -94,7 +94,7 @@ function routesConfiguration(app, passport) {
 		recordInfo = {
 			id: req.user.id,
 			user: req.user.name,
-			date: "01/06/2022",
+			date: "02.06.2022",
 		};
 		res.json(recordInfo);
 	});
@@ -102,7 +102,7 @@ function routesConfiguration(app, passport) {
 
 // route middleware for user state 
 function isLoggedIn(req, res, next) {
-	console.log(req.user);
+	// console.log(req.user);
 	// if user is authenticated in the session, carry on
 	if (req.isAuthenticated())
 		return next();
