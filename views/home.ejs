@@ -22,36 +22,45 @@
         <div class="logo">
             <h2>D</h2>
         </div>
-        
+
         <div class="icons mt-4">
             <i class="bi bi-house"></i>
         </div>
     </div>
-    
-    <div class="content-container">
-    <!-- Upload Form Modal -->
-    <div id="formModal" class="form-modal">
-        <!-- Form content -->
 
-        <div class="modal-content">
-            <div class="close-container">
-                <span class="close">&times;</span>
+    <div class="content-container">
+        <!-- Upload Form Modal -->
+        <div id="formModal" class="form-modal">
+            <!-- Form content -->
+
+            <div class="modal-content">
+                <div class="close-container">
+                    <span class="close">&times;</span>
+                </div>
+                <h1 class="create-record-title">Create Record</h1>
+                <form action="/record/upload" method="POST" onsubmit="formSubmit()" enctype="multipart/form-data"
+                    class="create-record">
+                    <div class="textfield-label">
+                        <label for="numberPlate">Number Plate</label><br>
+                        <input type="text" id="numberPlate" name="numberPlate" required>
+                    </div>
+                    <div class="upload-container">
+                        <input type="file" id="images" name="images" accept="image/png, image/jpeg, image/jpg" multiple
+                            required>
+                    </div>
+                    <button class="submit-button" type="submit">Submit</button>
+                </form>
             </div>
-            <h1 class="create-record-title">Create Record</h1>
-            <form action="/record/upload" method="POST" onsubmit="closeModal()" enctype="multipart/form-data"
-                class="create-record">
-                <div class="textfield-label">
-                    <label for="numberPlate">Number Plate</label><br>
-                    <input type="text" id="numberPlate" name="numberPlate" required>
-                </div>
-                <div class="upload-container">
-                    <input type="file" id="images" name="images" accept="image/png, image/jpeg, image/jpg" multiple
-                        required>
-                </div>
-                <button class="submit-button" type="submit">Submit</button>
-            </form>
         </div>
-    </div>
+
+        <!-- LoadingModal -->
+        <div id="loadingModal" class="loading-modal">
+            <div class="modal-content">
+                <div id="myProgress">
+                    <div id="myBar"></div>
+                </div>
+            </div>
+        </div>
 
 
         <div class="content d-flex flex-column p-5">
@@ -76,7 +85,7 @@
                 </div>
                 <ul class="list-group mt-5">
                     <% locals.records.forEach((item)=> { %>
-                        <a target="_blank" href=<%="/reports/" + item.id +".pdf" %> >
+                        <a class="report" target="_blank" href=<%="/reports/" + item.id +".pdf" %> >
                             <li class="list-group-item p-2 d-flex align-items-center justify-content-between">
                                 <div class="leading d-flex align-items-center">
                                     <i class="bi bi-file-earmark-pdf"></i>
@@ -84,11 +93,15 @@
                                         <%= item.id %>
                                     </div>
                                 </div>
+                                <!-- <div> Hiiiiiiiiiiiiiiii</div> -->
                                 <div class="date">
                                     <%= item.time.toString().split('GMT')[0] %>
                                 </div>
-                                <a onclick="deleteRecord('<%=item.id%>')">
-                                <i class="bi bi-three-dots-vertical"></i> </a>
+                                <div class="trash">
+                                    <button class="btn-del" onclick="deleteRecord('<%=item.id%>')">
+                                        <i class="bi bi-trash"></i> </button>
+                                </div>
+                                <!-- <div> Hiiiiiiiiiiiiiiii</div> -->
                             </li>
                         </a>
                         <% }) %>

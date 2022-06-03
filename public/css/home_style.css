@@ -42,7 +42,7 @@
 
 
 /* The Modal (background) */
-.form-modal {
+.form-modal, .loading-modal {
   display: none;
   /* Hidden by default */
   position: fixed;
@@ -175,6 +175,15 @@ body{
   margin-top: 2rem;
 }
 
+.btn-del{
+  /* background-color: var(--sidebar-color);
+  color: var(--text-color); */
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 50%;
+}
+
 .bi {
   font-size: 2rem;
 }
@@ -207,6 +216,7 @@ body{
   font-size: 1.2rem;
   margin: 0.8rem 0rem;
   padding: 0.8rem 1.6rem !important;
+  display: flex;
 }
 
 .name {
@@ -214,6 +224,26 @@ body{
   width: 200px;
 }
 
-a{
+.report{
   text-decoration: none;
+  color: var(--text-color);
+}
+
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 0%;
+  height: 30px;
+  background-color: #01FE8D;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  transition-property: width;
+  transition-timing-function: ease;
+  transition-duration: 2s;
+  transition-delay: 1s;
 }
