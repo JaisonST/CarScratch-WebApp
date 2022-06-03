@@ -16,8 +16,15 @@ function routesConfiguration(app, passport) {
 
     //main home page - todo add signout button 
 	app.get('/',function(req, res) {
+		var t = ""
+		if(req.user){
+			t = "Home"
+		}else{
+			t = "Login"
+		}
 		res.render('index' , {
-            user : req.user
+            user : req.user, 
+			opt: t,
         }); // load the index.ejs file
 	});
 
