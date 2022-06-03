@@ -11,10 +11,26 @@ var conn = mysql.createConnection({
 // promise wrapper to enable async await with MYSQL
 const query = util.promisify(conn.query).bind(conn);
 
-async function getUserRecords(id){
-    const rows = await query("SELECT * FROM records WHERE user_id = ? ORDER BY time desc",[id]); 
-    return rows;
-    
+
+const dbModule = {
+    getRecords: async function(id){
+        const rows = await query("SELECT * FROM records WHERE user_id = ? ",[id]); 
+        return rows;    
+    }, 
+    deleteRecord:async function (id){
+        const rows = await query("DELETE FROM records WHERE id = ? ",[id]); 
+    }
 }
 
-module.exports = getUserRecords;
+
+async function delRecord(id){
+    const rows = await query("SELECT * FROM records WHERE user_id = ? ",[id]); 
+    return rows;    
+}
+
+async function getUserRecords(id){
+    const rows = await query("DELETE FROM records WHERE id = ? ",[id]); 
+    return rows;    
+}
+
+module.exports = dbModule;

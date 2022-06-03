@@ -87,7 +87,8 @@
                                 <div class="date">
                                     <%= item.time.toString().split('GMT')[0] %>
                                 </div>
-                                <i class="bi bi-three-dots-vertical"></i>
+                                <a onclick="deleteRecord('<%=item.id%>')">
+                                <i class="bi bi-three-dots-vertical"></i> </a>
                             </li>
                         </a>
                         <% }) %>
