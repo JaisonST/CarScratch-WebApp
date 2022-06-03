@@ -14,6 +14,7 @@
 body{
     background-color: var(--body-color);
     color: var(--text-color);
+    overflow-x: hidden;
 }
 
 /* Navbar */
@@ -78,22 +79,27 @@ span{
 }
 
 .carousel-item>img{
-    height: 300px;
+    height: 250px;
 }
 
 .card-body{
     color: var(--body-color);
+    width: 380px;
 }
 
 .feature-container>.card{
-    width: 300px;
+    width: 400px;
     background-color: var(--sidebar-color);
 }
 
 /* Model Cards */
 .model-card{
-    width: 600px;
+    width: 520px;
     height: 400px;
+}
+
+.model-card>img{
+    height: 100%;
 }
 
 /* Footer */

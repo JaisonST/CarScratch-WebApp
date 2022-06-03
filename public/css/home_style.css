@@ -149,10 +149,25 @@ input:disabled {
 body{
   background-color: var(--body-color);
   color: var(--text-color);
+  height: 100vh;
+}
+
+.content-container{
+  display: flex;
+  height: 100%;
+  /* border: 2px solid purple; */
+  overflow: auto;
 }
 
 .side-container {
   background-color: var(--sidebar-color);
+  float: left;
+  height: 100%;
+}
+
+.header{
+  border-bottom: 1px solid var(--text-color);
+  padding-bottom: 1rem;
 }
 
 .logo {
@@ -196,6 +211,7 @@ body{
 
 .name {
   margin-left: 1.3rem;
+  width: 200px;
 }
 
 a{

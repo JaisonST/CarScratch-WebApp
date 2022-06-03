@@ -1,8 +1,6 @@
 const loadModel = require('../node_model/load_model');
-const path = require('path');
-
-const generatePdf = require('../public/js/pdf');
 const getUserRecords = require('../public/js/db');
+const path = require('path');
 
 
 records_list = [1,2,3] 

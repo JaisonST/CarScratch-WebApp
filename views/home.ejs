@@ -15,18 +15,20 @@
     <link rel="stylesheet" href="/css/home_style.css">
 </head>
 
-<body class="d-flex">
+<body>
+
     <!-- Sidebar -->
     <div class="side-container p-3 text-center">
         <div class="logo">
             <h2>D</h2>
         </div>
-
+        
         <div class="icons mt-4">
             <i class="bi bi-house"></i>
         </div>
     </div>
-
+    
+    <div class="content-container">
     <!-- Upload Form Modal -->
     <div id="formModal" class="form-modal">
         <!-- Form content -->
@@ -52,50 +54,47 @@
     </div>
 
 
-    <div class="content d-flex flex-column p-5">
-        <!-- Header section -->
-        <div class="header d-flex justify-content-between">
-            <div class="header-title">
-                <h2>DEFECTFIND</h2>
+        <div class="content d-flex flex-column p-5">
+            <!-- Header section -->
+            <div class="header d-flex justify-content-between">
+                <div class="header-title">
+                    <h2>DEFECTFIND</h2>
+                </div>
+
+                <div class="icon-list">
+                    <i class="bi bi-plus-square" onclick="addRecord();"></i>
+                    <a href="logout"><i class="bi bi-box-arrow-right"></i></a>
+                </div>
             </div>
 
-            <div class="icon-list">
-                <i class="bi bi-plus-square" onclick="addRecord();"></i>
-                <a href="logout"><i class="bi bi-box-arrow-right"></i></a>
-            </div>
-        </div>
-
-        <hr>
-
-        <!-- Reports -->
-        <div class="reports-container mt-5">
-            <div class="folder d-flex align-items-center">
-                <i class="bi bi-folder"></i>
-                <i class="bi bi-chevron-down m-1"></i>
-                <h5 class="m-2">All files</h5>
-            </div>
-            <ul class="list-group mt-5">
-                <% locals.records.forEach((item)=> { %>
-                    <a target="_blank" href=<%= "/reports/" + item.id +".pdf" %> >
-                        <li class="list-group-item p-2 d-flex align-items-center justify-content-between">
-                            <div class="leading d-flex align-items-center">
-                                <i class="bi bi-file-earmark-pdf"></i>
-                                <div class="name">
-                                    <%= item.id %>
+            <!-- Reports -->
+            <div class="reports-container mt-5">
+                <div class="folder d-flex align-items-center">
+                    <i class="bi bi-folder"></i>
+                    <i class="bi bi-chevron-down m-1"></i>
+                    <h5 class="m-2">All files</h5>
+                </div>
+                <ul class="list-group mt-5">
+                    <% locals.records.forEach((item)=> { %>
+                        <a target="_blank" href=<%="/reports/" + item.id +".pdf" %> >
+                            <li class="list-group-item p-2 d-flex align-items-center justify-content-between">
+                                <div class="leading d-flex align-items-center">
+                                    <i class="bi bi-file-earmark-pdf"></i>
+                                    <div class="name">
+                                        <%= item.id %>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="date">
-                                <%= item.time.toString().split('GMT')[0] %>
-                            </div>
-                            <i class="bi bi-three-dots-vertical"></i>
-                        </li>
-                    </a>
-                    <% }) %>
-            </ul>
+                                <div class="date">
+                                    <%= item.time.toString().split('GMT')[0] %>
+                                </div>
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </li>
+                        </a>
+                        <% }) %>
+                </ul>
+            </div>
         </div>
-
     </div>
-
     <script src="/js/home_script.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
