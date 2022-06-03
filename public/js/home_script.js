@@ -14,4 +14,12 @@ window.onclick = function(event) {
     }
 }
 
+function deleteRecord(id){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost/record/delete", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(
+        {id: id}));
+    location.reload();
+}
 span.onclick = closeModal; 

@@ -1,6 +1,6 @@
 var multer  = require('multer')
 var fs = require('fs');
-
+const dbModule = require('../public/js/db');
 var callModel = require('../node_model/model_handler.js');
 
 //database 
@@ -66,6 +66,14 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
 function recordController(app, passport) {
+  
+    app.post('/record/delete', async function(req,res) {
+      if(req.body.id){
+        await dbModule.deleteRecord(req.body.id);
+      }
+      res.redirect("/home"); 
+    })
+
     app.post('/record/upload',  upload.array('images', 12), createRecord ,async function(req, res) {
       
       //this returns the number plate

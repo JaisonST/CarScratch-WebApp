@@ -1,12 +1,12 @@
 const loadModel = require('../node_model/load_model');
-const getUserRecords = require('../public/js/db');
+const dbModule = require('../public/js/db');
 const path = require('path');
 
 
-records_list = [1,2,3] 
+records_list = [] 
 
 const getUserRecordsFromDb = async function(req,res,next){
-	var recods = await getUserRecords(req.user.id)
+	var recods = await dbModule.getRecords(req.user.id)
 	records_list = recods
 	next();
 }
@@ -84,7 +84,6 @@ function routesConfiguration(app, passport) {
 	// ---- Result.html 
 	app.get('/result', async(req, res) =>{
 		res.sendFile(path.join(__dirname.split('routes')[0] + '/views/result.html'));
-		// generatePdf;
 	});
 
 	// ---- Sending report info to be rendered dynamically in the result.html
