@@ -55,14 +55,13 @@ var storage = multer.diskStorage({
       const user = req.user.id 
       const nb = req.body.numberPlate 
       const dt = Date.now()
-      const fname = user.toString()+nb.toString()+dt.toString() + "."+file.originalname.split(".")[1]; 
+      const fname = user.toString()+nb.toString()+dt.toString() +file.originalname; 
       //todo: store the value below in db. 
       images_list.push(fname)
       cb(null, fname)
     }
 })
 var upload = multer({ storage: storage });
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
 function recordController(app, passport) {
@@ -81,6 +80,7 @@ function recordController(app, passport) {
       
       var dir = __dirname.split('/Desktop')[0] + '/Desktop/images/'+req.user.id;
     
+      console.log('Why is it loading repeated' + images_list);
       // Steps 
       // 1) upload images to server done in upload.array() 
       // 2) call python function to detect image. 

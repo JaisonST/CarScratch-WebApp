@@ -93,14 +93,6 @@ function routesConfiguration(app, passport) {
 		res.sendFile(path.join(__dirname.split('routes')[0] + '/views/result.html'));
 	});
 
-	// ---- Sending report info to be rendered dynamically in the result.html
-	app.get('/data', (req, res) => {
-		recordInfo = {
-			user: req.user.name,
-			date: "02.06.2022",
-		};
-		res.json(recordInfo);
-	});
 };
 
 // route middleware for user state 

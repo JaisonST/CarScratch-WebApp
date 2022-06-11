@@ -31,17 +31,23 @@
             files = images_list;
             user.innerHTML += params.get("user_name");
             id = params.get("user_id");
-            date.innerHTML += "02.06.2022";
+            var today = new Date();
+            var d = String(today.getDate()).padStart(2, "0");
+            var m = String(today.getMonth() + 1).padStart(2, "0");
+            var y = today.getFullYear();
+            
+            date.innerHTML += d+'.'+m+'.'+y;
             plate.innerHTML += params.get("number_plate")
             reportId.innerHTML += params.get("record_id");
     
             count = 1;
+            // console.log(files);
+            // files = [...new Set(files)];
+            // console.log(files);
             Array.from(files).forEach(element => {
                 resultImages.innerHTML += `<h5 class="mt-4"> ${element} </h5><img src="../records/Desktop/images/${params.get("user_id")}/pre/${element}" height="200px" width="300px" class="p-2">`;
                 resultImages.innerHTML += `<img src="../records/Desktop/images/${params.get("user_id")}/post/${element}" height="200px" width="300px" class="p-2">`;
                 if (count == 3 || ((count + 1) % 4 == 0)) {
-                    resultImages.innerHTML += `<h5 class="mt-4"> ${element} </h5><img src="../records/Desktop/images/${params.get("user_id")}/pre/${element}" height="200px" width="300px" class="p-2">`;
-                    resultImages.innerHTML += `<img src="../records/Desktop/images/${params.get("user_id")}/post/${element}" height="200px" width="300px" class="p-2">`;
                     resultImages.innerHTML += `<div class="html2pdf__page-break"></div>`;
                 }
                 count++;
@@ -76,7 +82,7 @@
             <div class="date" id="date"></div>
         </div>
 
-        <div class="report-id text-center mt-5">
+        <div class="report-id text-center mt-3">
             <h1 id="reportId">Report Id: </h1>
             <h5 class="mt-4" id="user">User: </h4>
                 <h6 id="plate">Number plate: </h6>
